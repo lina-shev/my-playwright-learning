@@ -9,6 +9,17 @@ test.describe('SauceDemo', () => {
       await page.goto('https://saucedemo.com')
     })
 
+    test('login with locked out user', async ({ page }) => {
+  await page.locator('[data-test="username"]').fill('locked_out_user')
+  await page.locator('[data-test="password"]').fill('secret_sauce')
+  await page.locator('[data-test="login-button"]').click()
+
+  await expect(
+    page.locator('[data-test="error"]'),
+    'Error should appear for locked out user'
+  ).toHaveText('Epic sadface: Sorry, this user has been locked out.')
+})
+
     test('login with valid credentials', async ({ page }) => {
       await page.locator('[data-test="username"]').fill('standard_user')
       await page.locator('[data-test="password"]').fill('secret_sauce')
