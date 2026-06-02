@@ -1,3 +1,4 @@
+// SauceDemo test suite
 import { test, expect } from '@playwright/test'
 
 test.describe('SauceDemo', () => {
@@ -58,6 +59,7 @@ test.describe('SauceDemo', () => {
       await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click()
       await expect(page.locator('.shopping_cart_badge'), 'Cart badge should show 1 after adding a product').toHaveText('1')
     })
+
 
     test('remove product from cart', async ({ page }) => {
       await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click()
