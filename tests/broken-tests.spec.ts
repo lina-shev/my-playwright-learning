@@ -1,3 +1,4 @@
+// Broken tests suit
 import { test, expect } from "@playwright/test";
 
 test("login should redirect to inventory", async ({ page }) => {
