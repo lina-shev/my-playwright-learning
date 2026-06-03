@@ -1,7 +1,22 @@
-// SauceDemo test suite
-// Changes test
-// Add more changes and test
-// test
+// Test cases — SauceDemo Track A
+//
+// Login tests:
+// - Valid user can log in and see inventory page
+// - Locked user cannot log in and sees correct error
+// - Login with wrong password shows error
+// - Login with empty form shows error
+// - Login with only username shows error
+// - Login with only password shows error
+// - Login with trailing space in password shows error
+//
+// Inventory tests:
+// - User can add one product to cart and verify badge shows 1
+// - User can remove product from cart and badge disappears
+// - User can add 3 products and remove 1, badge shows 2
+// - Cart keeps items after page refresh
+// - Products can be sorted by price low to high
+// - User can complete full checkout and see success message
+
 import { test, expect } from '@playwright/test'
 
 test.describe('SauceDemo', () => {
