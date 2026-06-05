@@ -117,20 +117,29 @@ test.describe('SauceDemo', () => {
     })
 
     test('user can complete checkout', async ({ page }) => {
-  await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click()
-  await page.locator('.shopping_cart_link').click()
-  await page.locator('[data-test="checkout"]').click()
+  await test.step('Add product to cart', async () => {
+    await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click()
+    await page.locator('.shopping_cart_link').click()
+  })
 
-  await page.locator('[data-test="firstName"]').fill('John')
-  await page.locator('[data-test="lastName"]').fill('Doe')
-  await page.locator('[data-test="postalCode"]').fill('12345')
-  await page.locator('[data-test="continue"]').click()
-  await page.locator('[data-test="finish"]').click()
+  await test.step('Start checkout', async () => {
+    await page.locator('[data-test="checkout"]').click()
+  })
 
-  await expect(
-    page.locator('[data-test="complete-header"]'),
-    'Success message should appear after checkout'
-  ).toHaveText('Thank you for your order!')
+  await test.step('Fill checkout info', async () => {
+    await page.locator('[data-test="firstName"]').fill('John')
+    await page.locator('[data-test="lastName"]').fill('Doe')
+    await page.locator('[data-test="postalCode"]').fill('12345')
+    await page.locator('[data-test="continue"]').click()
+  })
+
+  await test.step('Complete order', async () => {
+    await page.locator('[data-test="finish"]').click()
+    await expect(
+      page.locator('[data-test="complete-header"]'),
+      'Success message should appear after checkout'
+    ).toHaveText('Thank you for your order!')
+  })
 })
   })
 
