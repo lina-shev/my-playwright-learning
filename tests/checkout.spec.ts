@@ -34,6 +34,13 @@ test.describe("Checkout", () => {
       await checkoutPage.fillInfo("John", "Doe", "12345");
     });
 
+   await test.step("Verify overview page", async () => {
+  await expect(
+    checkoutPage.page.locator('.cart_item'),
+    "Overview page should show the selected product"
+  ).toContainText("Sauce Labs Backpack");
+});
+   
     await test.step("Complete order", async () => {
       await checkoutPage.finish();
       await expect(

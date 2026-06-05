@@ -28,4 +28,22 @@ test.describe("Cart", () => {
     await cartPage.removeProduct("Sauce Labs Backpack");
     await expect(inventoryPage.cartBadge).not.toBeVisible();
   });
+  
+  test("cart page shows product name", async () => {
+  await inventoryPage.addProductToCart("Sauce Labs Backpack");
+  await inventoryPage.openCart();
+  await expect(
+    cartPage.page.locator('.cart_item'),
+    "Cart should show the added product"
+  ).toContainText("Sauce Labs Backpack");
+});
+
+test("adding multiple products shows correct badge count", async () => {
+  await inventoryPage.addProductToCart("Sauce Labs Backpack");
+  await inventoryPage.addProductToCart("Sauce Labs Bike Light");
+  await expect(
+    inventoryPage.cartBadge,
+    "Cart badge should show 2 after adding 2 products"
+  ).toHaveText("2");
+});
 });
