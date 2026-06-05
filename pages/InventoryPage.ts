@@ -20,4 +20,12 @@ export class InventoryPage {
   async openCart() {
     await this.cartLink.click();
   }
+  async sortBy(option: string) {
+    await this.page.locator('[data-test="product-sort-container"]').selectOption(option);
+  }
+
+  async getProductPrices(): Promise<number[]> {
+    const priceElements = await this.page.locator('.inventory_item_price').allTextContents();
+    return priceElements.map(price => parseFloat(price.replace('$', '')));
+  }
 }
